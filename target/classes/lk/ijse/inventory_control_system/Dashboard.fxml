@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="600" prefWidth="1000" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.inventory_control_system.controllers.DashboardController">
+
+    <left>
+        <VBox prefWidth="200" spacing="20" style="-fx-background-color: #2C3E50; -fx-padding: 20;">
+            <Label style="-fx-text-fill: white; -fx-font-size: 22px; -fx-font-weight: bold;" text="Dashboard" />
+            <Button fx:id="Inventory" prefHeight="40" prefWidth="160" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px; -fx-cursor: hand;" text="Inventory" />            
+            <Button fx:id="Sales" prefHeight="40" prefWidth="160" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px; -fx-cursor: hand;" text="Sales" />
+            <Button fx:id="Services" prefHeight="40" prefWidth="160" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px; -fx-cursor: hand;" text="Services" />
+            <Button fx:id="Expenses" prefHeight="40" prefWidth="160" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px; -fx-cursor: hand;" text="Expenses" />
+            <Button fx:id="Management" prefHeight="40" prefWidth="160" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px; -fx-cursor: hand;" text="Management" />
+            <Pane VBox.vgrow="ALWAYS" />
+            <Button fx:id="logoutButton" prefHeight="40" prefWidth="160" style="-fx-background-color: #E74C3C; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 10; -fx-cursor: hand;" text="Logout" />
+        </VBox>
+    </left>
+
+    <top>
+        <HBox prefHeight="60" style="-fx-background-color: #34495E; -fx-padding: 10;">
+            <Label style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" text="Dashboard Overview" />
+        </HBox>
+    </top>
+
+    <center>
+        <Pane fx:id="contentPane" style="-fx-background-color: #ECF0F1;">
+            <VBox alignment="CENTER" layoutX="0" layoutY="50" prefHeight="500" prefWidth="800" spacing="40">
+
+                <HBox alignment="CENTER" spacing="60">
+                    <VBox alignment="CENTER" spacing="10">
+                        <ImageView fx:id="inventoryIcon" fitHeight="100" fitWidth="100" preserveRatio="true" style="-fx-cursor: hand;">
+                    <image>
+                        <Image url="@images/inventory_icon.png" />
+                    </image>
+                        </ImageView>
+                        <Label fx:id="inventoryLabel" alignment="CENTER" prefHeight="26.0" prefWidth="120.0" style="-fx-cursor: hand;" text="Inventory">
+                    <font>
+                        <Font name="Verdana Bold" size="16.0" />
+                    </font>
+                        </Label>
+                    </VBox>
+                    <VBox alignment="CENTER" spacing="10">
+                        <ImageView fx:id="salesIcon" fitHeight="100" fitWidth="100" preserveRatio="true" style="-fx-cursor: hand;">
+                     <image>
+                        <Image url="@images/sales_icon.png" />
+                     </image>
+                        </ImageView>
+                        <Label fx:id="salesLabel" alignment="CENTER" prefHeight="26.0" prefWidth="120.0" style="-fx-cursor: hand;" text="Sales">
+                    <font>
+                        <Font name="Verdana Bold" size="16.0" />
+                    </font>
+                        </Label>
+                    </VBox>
+                    <VBox alignment="CENTER" spacing="10">
+                        <ImageView fx:id="servicesIcon" fitHeight="100" fitWidth="100" preserveRatio="true" style="-fx-cursor: hand;">
+                     <image>
+                        <Image url="@images/services_icon.png" />
+                     </image>
+                        </ImageView>
+                        <Label fx:id="servicesLabel" alignment="CENTER" prefHeight="26.0" prefWidth="120.0" style="-fx-cursor: hand;" text="Services">
+                    <font>
+                        <Font name="Verdana Bold" size="16.0" />
+                    </font>
+                        </Label>
+                    </VBox>
+                </HBox>
+
+                <HBox alignment="CENTER" spacing="60">
+                    <VBox alignment="CENTER" spacing="10">
+                        <ImageView fx:id="expensesIcon" fitHeight="100" fitWidth="100" preserveRatio="true" style="-fx-cursor: hand;">
+                    <image>
+                       <Image url="@images/expenses_icon.png" />
+                    </image></ImageView>
+                        <Label fx:id="expensesLabel" alignment="CENTER" prefHeight="26.0" prefWidth="120.0" style="-fx-cursor: hand;" text="Expenses">
+                            <font>
+                                <Font name="Verdana Bold" size="16.0" />
+                            </font>
+                        </Label>
+                    </VBox>
+                    <VBox alignment="CENTER" spacing="10">
+                        <ImageView fx:id="managementIcon" fitHeight="100" fitWidth="100" preserveRatio="true" style="-fx-cursor: hand;">
+                                     <image>
+                                        <Image url="@images/management_icon.png" />
+                                     </image></ImageView>
+                        <Label fx:id="managementLabel" alignment="CENTER" prefHeight="26.0" prefWidth="120.0" style="-fx-cursor: hand;" text="Management">
+                            <font>
+                                <Font name="Verdana Bold" size="16.0" />
+                            </font>
+                        </Label>
+                    </VBox>
+                </HBox>
+            </VBox>
+        </Pane>
+    </center>
+
+</BorderPane>
