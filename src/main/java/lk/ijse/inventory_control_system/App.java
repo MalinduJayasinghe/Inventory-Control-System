@@ -14,7 +14,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         primaryStage = stage;
-        loadWindow("Dashboard");
+        loadWindow("Login");
     }
 
     public static void loadWindow(String fxml) throws IOException {

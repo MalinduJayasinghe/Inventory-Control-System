@@ -2,53 +2,66 @@ package lk.ijse.inventory_control_system.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
-import javafx.scene.control.Label;
 import java.io.IOException;
-import javafx.animation.PauseTransition;
-import javafx.scene.effect.DropShadow;
-import javafx.util.Duration;
+import java.util.HashMap;
+import java.util.Map;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import lk.ijse.inventory_control_system.App;
 
 public class DashboardController {
 
-    @FXML private Button Inventory;
-    @FXML private Button Sales;
-    @FXML private Button Services;
+    @FXML private Button Items;
+    @FXML private Button DamagedItems;
+    @FXML private Button PurchaseOrders;
+    @FXML private Button CustomerOrders;
+    @FXML private Button Payment;
+    @FXML private Button BundleOffers;
+    @FXML private Button CreditPayments;
+    @FXML private Button Photocopying;
+    @FXML private Button DataReload;
     @FXML private Button Expenses;
-    @FXML private Button Management;
+    @FXML private Button Customers;
+    @FXML private Button Suppliers;
+
     @FXML private Button logoutButton;
-
-    @FXML private ImageView inventoryIcon;
-    @FXML private ImageView salesIcon;
-    @FXML private ImageView servicesIcon;
-    @FXML private ImageView expensesIcon;
-    @FXML private ImageView managementIcon;
-
-    @FXML private Label inventoryLabel;
-    @FXML private Label salesLabel;
-    @FXML private Label servicesLabel;
-    @FXML private Label expensesLabel;
-    @FXML private Label managementLabel;
     
+    @FXML private Pane contentPane;
+    
+    private final Map<Button, String> baseStyles = new HashMap<>();
+    private final Map<Button, String> hoverStyles = new HashMap<>();
+
     @FXML
-    public void initialize(){
-        addHoverEffect(inventoryIcon);
-        addHoverEffect(salesIcon);
-        addHoverEffect(servicesIcon);
-        addHoverEffect(expensesIcon);
-        addHoverEffect(managementIcon);
-        styleButton(Inventory, "#2C3E50");
-        styleButton(Sales, "#2C3E50");
-        styleButton(Services, "#2C3E50");
+    public void initialize() {
+
+        styleButton(Items, "#2C3E50");
+        styleButton(DamagedItems, "#2C3E50");
+        styleButton(PurchaseOrders, "#2C3E50");
+        styleButton(CustomerOrders, "#2C3E50");
+        styleButton(Payment, "#2C3E50");
+        styleButton(BundleOffers, "#2C3E50");
+        styleButton(CreditPayments, "#2C3E50");
+        styleButton(Photocopying, "#2C3E50");
+        styleButton(DataReload, "#2C3E50");
         styleButton(Expenses, "#2C3E50");
-        styleButton(Management, "#2C3E50");
+        styleButton(Customers, "#2C3E50");
+        styleButton(Suppliers, "#2C3E50");
+
         styleButton(logoutButton, "#E74C3C");
-        setupNavigation(Inventory, inventoryIcon, inventoryLabel, "Inventory");
-        setupNavigation(Sales, salesIcon, salesLabel, "Sales");
-        setupNavigation(Services, servicesIcon, servicesLabel, "Services");
-        setupNavigation(Expenses, expensesIcon, expensesLabel, "Expenses");
-        setupNavigation(Management, managementIcon, managementLabel, "Management");
+
+        setupNavigation(Items, "Items");
+        setupNavigation(DamagedItems, "DamagedItem");
+        setupNavigation(PurchaseOrders, "PurchaseOrder");
+        setupNavigation(CustomerOrders, "CustomerOrder");
+        setupNavigation(Payment, "Payment");
+        setupNavigation(BundleOffers, "BundleOffer");
+        setupNavigation(CreditPayments, "CreditPayment");
+        setupNavigation(Photocopying, "Photocopying");
+        setupNavigation(DataReload, "DataReload");
+        setupNavigation(Expenses, "Expenses");
+        setupNavigation(Customers, "Customers");
+        setupNavigation(Suppliers, "Suppliers");
 
         logoutButton.setOnAction(e -> {
             try {
@@ -58,65 +71,57 @@ public class DashboardController {
             }
         });
     }
-    
-    @FXML
-    private void addHoverEffect(ImageView img) {
-        DropShadow shadow = new DropShadow();
-        shadow.setRadius(15);
 
-        img.setOnMouseEntered(e -> img.setEffect(shadow));
-        img.setOnMouseExited(e -> img.setEffect(null));
-    }
- 
     @FXML
     private void styleButton(Button btn, String baseColor) {
 
         String normalStyle = "-fx-background-color: " + baseColor + ";"
-                + "-fx-background-radius: 8;"
-                + "-fx-text-fill: white;"
-                + "-fx-font-family: 'Verdana';"
-                + "-fx-font-size: 16px;"
-                + "-fx-font-weight: bold;";
+            + "-fx-background-radius: 8;"
+            + "-fx-text-fill: white;"
+            + "-fx-font-family: 'Verdana';"
+            + "-fx-font-size: 16px;"
+            + "-fx-font-weight: bold;";
 
-        String hoverStyle = normalStyle 
+        String hoverStyle = normalStyle
                 + "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0.3, 0, 3);";
+
+        baseStyles.put(btn, normalStyle);
+        hoverStyles.put(btn, hoverStyle);
 
         btn.setStyle(normalStyle);
 
         btn.setOnMouseEntered(e -> btn.setStyle(hoverStyle));
-
-        btn.setOnMouseExited(e -> {
-            btn.setStyle(normalStyle);
-            btn.setEffect(null);
-            }
-        );
+        btn.setOnMouseExited(e -> btn.setStyle(normalStyle));
     }
-    
+
     @FXML
-    private void setupNavigation(Button button, ImageView icon, Label label, String fxmlName) {
-        
+    private void setupNavigation(Button button, String fxmlName) {
         button.setOnAction(e -> {
-            try {
-                App.loadWindow(fxmlName);
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        });
+        try {
+            Pane pane = FXMLLoader.load(getClass().getResource("/lk/ijse/inventory_control_system/" + fxmlName + ".fxml"));
+            contentPane.getChildren().clear();
+            contentPane.getChildren().add(pane);
+            AnchorPane.setTopAnchor(pane, 0.0);
+            AnchorPane.setBottomAnchor(pane, 0.0);
+            AnchorPane.setLeftAnchor(pane, 0.0);
+            AnchorPane.setRightAnchor(pane, 0.0);
+            highlightButton(button);
+            
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    });
+}
 
-        icon.setOnMouseClicked(e -> {
-            try {
-                App.loadWindow(fxmlName);
-            } catch (IOException ex) {
-                ex.printStackTrace();
+    private void highlightButton(Button button) {
+        
+        for (Button btn : baseStyles.keySet()) {
+            if (btn == button) {
+                btn.setStyle(baseStyles.get(btn).replaceFirst("-fx-background-color: #[0-9A-Fa-f]{6};", "-fx-background-color: #1ABC9C;"));
+            } else {
+                btn.setStyle(baseStyles.get(btn));
             }
-        });
-
-        label.setOnMouseClicked(e -> {
-            try {
-                App.loadWindow(fxmlName);
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        });
+        }
     }
 }
+
