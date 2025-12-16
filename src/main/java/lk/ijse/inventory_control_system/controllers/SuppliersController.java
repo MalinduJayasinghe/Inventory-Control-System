@@ -8,6 +8,8 @@ import lk.ijse.inventory_control_system.dto.SuppliersDTO;
 import lk.ijse.inventory_control_system.model.SuppliersModel;
 
 import java.sql.SQLException;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 public class SuppliersController {
 
@@ -55,24 +57,27 @@ public class SuppliersController {
     private void saveSupplier() {
         try {
             SuppliersDTO supplier = new SuppliersDTO(
-                    Integer.parseInt(supplierIDField.getText()),
-                    supplierNameField.getText(),
-                    addressField.getText(),
-                    emailField.getText(),
-                    contactNumberField.getText()
+                Integer.parseInt(supplierIDField.getText()),
+                supplierNameField.getText(),
+                addressField.getText(),
+                emailField.getText(),
+                contactNumberField.getText()
             );
 
             if (suppliersModel.saveSupplier(supplier)) {
-                new Alert(Alert.AlertType.INFORMATION, "Supplier saved!").show();
+                new Alert(Alert.AlertType.INFORMATION, "Supplier saved successfully!").show();
                 loadSupplierTable();
                 resetFields();
             }
 
+        } catch (NumberFormatException e) {
+            new Alert(Alert.AlertType.WARNING, "Supplier ID must be a valid number!").show();
         } catch (SQLException e) {
             e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR, "Error saving supplier!").show();
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
+
 
     @FXML
     private void updateSupplier() {
@@ -113,22 +118,19 @@ public class SuppliersController {
     }
 
     @FXML
-    private void searchSupplier() {
+private void handleSearchSupplier(KeyEvent event) {
+    if (event.getCode() == KeyCode.ENTER) {
         try {
             SuppliersDTO supplier = suppliersModel.searchSupplier(supplierIDField.getText());
-            if (supplier != null) {
-                supplierNameField.setText(supplier.getSupplierName());
-                addressField.setText(supplier.getAddress());
-                emailField.setText(supplier.getEmail());
-                contactNumberField.setText(supplier.getContactNumber());
-            } else {
-                new Alert(Alert.AlertType.WARNING, "Supplier not found!").show();
-            }
-
+            if (supplier != null) populateFields(supplier);
+            else new Alert(Alert.AlertType.ERROR, "Supplier not found!").show();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+}
+
+    
     @FXML
     private void resetFields() {
         supplierIDField.clear();
@@ -136,5 +138,13 @@ public class SuppliersController {
         addressField.clear();
         emailField.clear();
         contactNumberField.clear();
+    }
+
+    private void populateFields(SuppliersDTO supplier) {
+        supplierIDField.setText(String.valueOf(supplier.getSupplierID()));
+        supplierNameField.setText(supplier.getSupplierName());
+        addressField.setText(supplier.getAddress());
+        emailField.setText(supplier.getEmail());
+        contactNumberField.setText(supplier.getContactNumber());
     }
 }

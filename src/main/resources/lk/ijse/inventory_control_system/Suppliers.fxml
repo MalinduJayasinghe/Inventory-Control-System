@@ -8,62 +8,64 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="500.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.inventory_control_system.controllers.SuppliersController">
+<AnchorPane maxWidth="925.0" prefHeight="500.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.inventory_control_system.controllers.SuppliersController">
 
     <children>
-        <VBox spacing="15" AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="10">
-         <HBox prefHeight="45.0" prefWidth="779.0" style="-fx-background-color: #2C3E50;">
-            <children>
-      
-                  <!-- Title -->
-                  <Label style="-fx-font-size: 22px; -fx-font-weight: bold;" text="  Manage Suppliers" textFill="#f7f7f7" />
-            </children>
-         </HBox>
 
-            <HBox spacing="20">
-                
+         <HBox layoutX="10.399999618530273" layoutY="50.400001525878906" spacing="20">
+             
                 <!-- Left Form -->
-                <VBox prefWidth="300" spacing="12">
+             <VBox prefHeight="400.0" prefWidth="227.0" spacing="12">
 
-                    <Label text="Supplier ID:" />
-                    <TextField fx:id="supplierIDField" onKeyPressed="#searchSupplier" promptText="Enter Supplier ID" />
+                 <Label text="Search with Supplier ID:" />
+                 <TextField fx:id="supplierIDField" onKeyPressed="#handleSearchSupplier" promptText="Enter Supplier ID" />
 
-                    <Label text="Supplier Name:" />
-                    <TextField fx:id="supplierNameField" promptText="Enter Supplier Name" />
+                 <Label text="Supplier Name:" />
+                 <TextField fx:id="supplierNameField" promptText="Enter Supplier Name" />
 
-                    <Label text="Address:" />
-                    <TextField fx:id="addressField" promptText="Enter Address" />
+                 <Label text="Address:" />
+                 <TextField fx:id="addressField" promptText="Enter Address" />
 
-                    <Label text="Email:" />
-                    <TextField fx:id="emailField" promptText="Enter Email" />
+                 <Label text="Email:" />
+                 <TextField fx:id="emailField" promptText="Enter Email" />
 
-                    <Label text="Contact Number:" />
-                    <TextField fx:id="contactNumberField" promptText="Enter Contact Number" />
+                 <Label text="Contact Number:" />
+                 <TextField fx:id="contactNumberField" promptText="Enter Contact Number" />
 
-                    <HBox spacing="10">
-                        <Button fx:id="saveBtn" onAction="#saveSupplier" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Save" />
-                        <Button fx:id="updateBtn" onAction="#updateSupplier" style="-fx-background-color: #2196F3; -fx-text-fill: white;" text="Update" />
-                        <Button fx:id="deleteBtn" onAction="#deleteSupplier" style="-fx-background-color: #F44336; -fx-text-fill: white;" text="Delete" />
-                    </HBox>
+                 <HBox spacing="10">
+                     <Button fx:id="saveBtn" onAction="#saveSupplier" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Save" />
+                     <Button fx:id="updateBtn" onAction="#updateSupplier" style="-fx-background-color: #2196F3; -fx-text-fill: white;" text="Update" />
+                     <Button fx:id="deleteBtn" onAction="#deleteSupplier" style="-fx-background-color: #F44336; -fx-text-fill: white;" text="Delete" />
+                 </HBox>
 
-                    <Button onAction="#resetFields" style="-fx-background-color: #9E9E9E; -fx-text-fill: white;" text="Clear Fields" />
+                 <Button onAction="#resetFields" style="-fx-background-color: #9E9E9E; -fx-text-fill: white;" text="Clear Fields" />
 
-                </VBox>
+             </VBox>
 
-                <!-- Table -->
-                <TableView fx:id="suppliersTable" onKeyPressed="#searchSupplier" prefHeight="400.0" prefWidth="675.0">
-                    <columns>
-                        <TableColumn fx:id="colSupplierID" prefWidth="90" text="Supplier ID" />
-                        <TableColumn fx:id="colSupplierName" prefWidth="120" text="Name" />
-                        <TableColumn fx:id="colAddress" prefWidth="140" text="Address" />
-                        <TableColumn fx:id="colEmail" prefWidth="140" text="Email" />
-                        <TableColumn fx:id="colContact" prefWidth="120" text="Contact" />
-                    </columns>
-                </TableView>
+             <!-- Table -->
+             <TableView fx:id="suppliersTable" onKeyPressed="#handleSearchSupplier" prefHeight="400.0" prefWidth="610.0">
+                 <columns>
+                     <TableColumn fx:id="colSupplierID" prefWidth="90" text="Supplier ID" />
+                     <TableColumn fx:id="colSupplierName" prefWidth="120" text="Name" />
+                     <TableColumn fx:id="colAddress" prefWidth="140" text="Address" />
+                     <TableColumn fx:id="colEmail" prefWidth="140" text="Email" />
+                     <TableColumn fx:id="colContact" prefWidth="119.19998779296873" text="Contact" />
+                 </columns>
+             </TableView>
 
-            </HBox>
-        </VBox>
+         </HBox>
+        <AnchorPane layoutX="0" layoutY="0" prefHeight="42.0" prefWidth="880.0" style="-fx-background-color: #2C3E50;">
+            <children>
+                <Text layoutX="10" layoutY="32" style="-fx-fill: white;" text="Supplier Management">
+                    <font>
+                        <Font name="System Bold" size="21" />
+                    </font>
+                </Text>
+            </children>
+        </AnchorPane>
     </children>
 
 </AnchorPane>

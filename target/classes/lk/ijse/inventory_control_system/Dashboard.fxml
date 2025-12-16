@@ -6,71 +6,79 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ScrollPane?>
 
-<BorderPane prefHeight="600" prefWidth="1100"
+<BorderPane prefHeight="600" prefWidth="1140"
             xmlns="http://javafx.com/javafx/13" 
             xmlns:fx="http://javafx.com/fxml/1" 
             fx:controller="lk.ijse.inventory_control_system.controllers.DashboardController">
 
     <left>
-        <VBox prefWidth="260" spacing="20" style="-fx-background-color: #2C3E50; -fx-padding: 20;">
-            <Label style="-fx-text-fill: white; -fx-font-size: 22px; -fx-font-weight: bold;" text="Dashboard" />
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" style="-fx-background: #2C3E50; -fx-border-color: transparent;">
+            <content>
+                <VBox prefWidth="260" spacing="20" style="-fx-background-color: #2C3E50; -fx-padding: 20;">
 
-            <Button fx:id="Items" prefHeight="40" prefWidth="260" maxWidth="Infinity"
-                    style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px; -fx-cursor: hand;"
-                    text="Items" />
+                    <Label style="-fx-text-fill: white; -fx-font-size: 22px; -fx-font-weight: bold;" 
+                           text="Dashboard" />
 
-            <Button fx:id="DamagedItems" prefHeight="40" prefWidth="260" maxWidth="Infinity"
-                    style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px; -fx-cursor: hand;"
-                    text="Damaged Items" />
+                    <Button fx:id="Items" prefHeight="40" maxWidth="Infinity"
+                            style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px;"
+                            text="Items" />
 
-            <Button fx:id="PurchaseOrders" prefHeight="40" prefWidth="260" maxWidth="Infinity"
-                    style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px; -fx-cursor: hand;"
-                    text="Purchase Orders" />
+                    <Button fx:id="DamagedItems" prefHeight="40" maxWidth="Infinity"
+                            style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px;"
+                            text="Damaged Items" />
 
-            <Button fx:id="CustomerOrders" prefHeight="40" prefWidth="260" maxWidth="Infinity"
-                    style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px; -fx-cursor: hand;"
-                    text="Customer Orders" />
+                    <Button fx:id="PurchaseOrders" prefHeight="40" maxWidth="Infinity"
+                            style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px;"
+                            text="Purchase Orders" />
 
-            <Button fx:id="Payment" prefHeight="40" prefWidth="260" maxWidth="Infinity"
-                    style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px; -fx-cursor: hand;"
-                    text="Payment" />
+                    <Button fx:id="CustomerOrders" prefHeight="40" maxWidth="Infinity"
+                            style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px;"
+                            text="Customer Orders" />
 
-            <Button fx:id="BundleOffers" prefHeight="40" prefWidth="260" maxWidth="Infinity"
-                    style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px; -fx-cursor: hand;"
-                    text="Bundle Offers" />
+                    <Button fx:id="Payment" prefHeight="40" maxWidth="Infinity"
+                            style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px;"
+                            text="Payment" />
 
-            <Button fx:id="CreditPayments" prefHeight="40" prefWidth="260" maxWidth="Infinity"
-                    style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px; -fx-cursor: hand;"
-                    text="Credit Payments" />
+                    <Button fx:id="BundleOffers" prefHeight="40" maxWidth="Infinity"
+                            style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px;"
+                            text="Bundle Offers" />
 
-            <Button fx:id="Photocopying" prefHeight="40" prefWidth="260" maxWidth="Infinity"
-                    style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px; -fx-cursor: hand;"
-                    text="Photocopying" />
+                    <Button fx:id="CreditPayments" prefHeight="40" maxWidth="Infinity"
+                            style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px;"
+                            text="Credit Payments" />
 
-            <Button fx:id="DataReload" prefHeight="40" prefWidth="260" maxWidth="Infinity"
-                    style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px; -fx-cursor: hand;"
-                    text="Data Reload" />
+                    <Button fx:id="Photocopying" prefHeight="40" maxWidth="Infinity"
+                            style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px;"
+                            text="Photocopying" />
 
-            <Button fx:id="Expenses" prefHeight="40" prefWidth="260" maxWidth="Infinity"
-                    style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px; -fx-cursor: hand;" 
-                    text="Expenses" />
+                    <Button fx:id="DataReload" prefHeight="40" maxWidth="Infinity"
+                            style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px;"
+                            text="Data Reload" />
 
-            <Button fx:id="Customers" prefHeight="40" prefWidth="260" maxWidth="Infinity"
-                    style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px; -fx-cursor: hand;"
-                    text="Customers" />
+                    <Button fx:id="Expenses" prefHeight="40" maxWidth="Infinity"
+                            style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px;"
+                            text="Expenses" />
 
-            <Button fx:id="Suppliers" prefHeight="40" prefWidth="260" maxWidth="Infinity"
-                    style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px; -fx-cursor: hand;"
-                    text="Suppliers" />
+                    <Button fx:id="Customers" prefHeight="40" maxWidth="Infinity"
+                            style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px;"
+                            text="Customers" />
 
-            <Pane VBox.vgrow="ALWAYS" />
+                    <Button fx:id="Suppliers" prefHeight="40" maxWidth="Infinity"
+                            style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px;"
+                            text="Suppliers" />
 
-            <Button fx:id="logoutButton" prefHeight="40" prefWidth="260" maxWidth="Infinity"
-                    style="-fx-background-color: #E74C3C; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 10; -fx-cursor: hand;"
-                    text="Logout" />
-        </VBox>
+                    <Pane VBox.vgrow="ALWAYS" />
+
+                    <Button fx:id="logoutButton" prefHeight="40" maxWidth="Infinity"
+                            style="-fx-background-color: #E74C3C; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 10;"
+                            text="Logout" />
+                </VBox>
+            </content>
+        </ScrollPane>
     </left>
+
 
     <top>
         <HBox prefHeight="60" style="-fx-background-color: #34495E; -fx-padding: 10;">

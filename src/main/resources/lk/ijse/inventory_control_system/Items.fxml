@@ -11,12 +11,12 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #ECF0F1;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.inventory_control_system.controllers.ItemsController">
+<AnchorPane prefHeight="549.0" prefWidth="864.0" style="-fx-background-color: #ECF0F1;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.inventory_control_system.controllers.ItemsController">
     <children>
         <!-- Header -->
         <VBox prefHeight="40.0" prefWidth="800.0" style="-fx-background-color: #2C3E50;">
             <children>
-                <Text fill="white" text="Item Management" textAlignment="CENTER" wrappingWidth="800">
+                <Text fill="white" text="  Item Management" wrappingWidth="880.0001220703125">
                     <font>
                         <Font name="System Bold" size="21.0" />
                     </font>
@@ -40,14 +40,14 @@
         </HBox>
 
         <!-- TableView -->
-        <TableView fx:id="tableItems" layoutX="38.0" layoutY="249.0" prefHeight="300.0" prefWidth="740.0" style="-fx-background-color: white; -fx-border-color: #BDC3C7;">
+        <TableView fx:id="tableItems" layoutX="11.0" layoutY="249.0" onKeyPressed="#handleSearchItem" prefHeight="300.0" prefWidth="857.0" style="-fx-background-color: white; -fx-border-color: #BDC3C7;">
             <columns>
                 <TableColumn fx:id="colItemID" prefWidth="80" text="Item ID" />
-                <TableColumn fx:id="colItemName" prefWidth="150" text="Item Name" />
-                <TableColumn fx:id="colItemQuantity" prefWidth="80" text="Quantity" />
-                <TableColumn fx:id="colUnitPrice" prefWidth="100" text="Unit Price" />
-                <TableColumn fx:id="colCategory" prefWidth="150" text="Category" />
-                <TableColumn fx:id="colSupplierID" prefWidth="80" text="Supplier ID" />
+                <TableColumn fx:id="colItemName" prefWidth="200.79995727539062" text="Item Name" />
+                <TableColumn fx:id="colItemQuantity" prefWidth="88.7999267578125" text="Quantity" />
+                <TableColumn fx:id="colUnitPrice" prefWidth="134.4000244140625" text="Unit Price" />
+                <TableColumn fx:id="colCategory" prefWidth="174.39996337890625" text="Category" />
+                <TableColumn fx:id="colSupplierID" prefWidth="176.00002441406252" text="Supplier ID" />
             </columns>
         </TableView>
           <Label layoutX="475.0" layoutY="163.0" text="Unit Price:" />
@@ -56,15 +56,15 @@
                 <Label layoutX="472.0" layoutY="59.0" text="Quantity:" />
           <TextField fx:id="itemQuantityField" layoutX="538.0" layoutY="59.0" prefHeight="26.0" prefWidth="154.0" promptText="Enter Item Quantity" />
           
-                <Label layoutX="31.0" layoutY="158.0" text="Category:" />
-          <TextField fx:id="categoryField" layoutX="93.0" layoutY="158.0" prefHeight="26.0" prefWidth="177.0" promptText="Enter Item Category" />
+                <Label layoutX="85.0" layoutY="158.0" text="Category:" />
+          <TextField fx:id="categoryField" layoutX="141.0" layoutY="158.0" prefHeight="26.0" prefWidth="177.0" promptText="Enter Item Category" />
           
                 <Label layoutX="472.0" layoutY="108.0" text="Supplier ID:" />
           <TextField fx:id="supplierIdField" layoutX="538.0" layoutY="108.0" prefHeight="26.0" prefWidth="154.0" promptText="Enter Supplier ID" />
           
-                <Label layoutX="28.0" layoutY="113.0" text="Item Name:" />
-          <TextField fx:id="itemNameField" layoutX="93.0" layoutY="113.0" prefHeight="26.0" prefWidth="178.0" promptText="Enter Item Name" />
-          <Label layoutX="31.0" layoutY="69.0" text="Item ID:" />
-          <TextField fx:id="itemIdField" layoutX="92.0" layoutY="69.0" prefHeight="26.0" prefWidth="178.0" promptText="Enter Item ID" />
+                <Label layoutX="74.0" layoutY="113.0" text="Item Name:" />
+          <TextField fx:id="itemNameField" layoutX="141.0" layoutY="113.0" prefHeight="26.0" prefWidth="178.0" promptText="Enter Item Name" />
+          <Label layoutX="31.0" layoutY="69.0" text="Search with Item ID:" />
+          <TextField fx:id="itemIdField" layoutX="142.0" layoutY="69.0" onKeyPressed="#handleSearchItem" prefHeight="26.0" prefWidth="178.0" promptText="Enter Item ID" />
     </children>
 </AnchorPane>
