@@ -17,6 +17,8 @@ lk\ijse\inventory_control_system\dto\PurchaseOrderDTO.class
 lk\ijse\inventory_control_system\controllers\CustomersController.class
 lk\ijse\inventory_control_system\model\DamagedItemModel.class
 lk\ijse\inventory_control_system\dto\PhotocopyingDTO.class
+lk\ijse\inventory_control_system\dto\ItemComboDTO.class
+lk\ijse\inventory_control_system\dto\DamagedItemViewDTO.class
 lk\ijse\inventory_control_system\dto\ItemsDTO.class
 lk\ijse\inventory_control_system\controllers\ItemsController.class
 lk\ijse\inventory_control_system\model\PaymentModel.class

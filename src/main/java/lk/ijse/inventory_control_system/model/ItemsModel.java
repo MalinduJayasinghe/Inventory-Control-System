@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lk.ijse.inventory_control_system.dto.ItemsDTO;
+import lk.ijse.inventory_control_system.dto.ItemComboDTO;
 import lk.ijse.inventory_control_system.util.CrudUtil;
 
 public class ItemsModel {
@@ -69,5 +70,29 @@ public class ItemsModel {
             itemList.add(item);
         }
         return itemList;
+    }
+    
+    public List<ItemComboDTO> getItemsForCombo() throws SQLException {
+        ResultSet rs = CrudUtil.execute("SELECT Item_ID, ItemName FROM Items");
+        List<ItemComboDTO> list = new ArrayList<>();
+
+        while (rs.next()) {
+            list.add(new ItemComboDTO(
+                rs.getInt("Item_ID"),
+                rs.getString("ItemName")
+            ));
+        }
+        return list;
+    }
+    
+    public String getItemNameByID(int itemID) throws SQLException {
+        ResultSet rs = CrudUtil.execute(
+            "SELECT ItemName FROM Items WHERE Item_ID=?",
+            itemID
+        );
+        if (rs.next()) {
+            return rs.getString("ItemName");
+        }
+        return "Unknown";
     }
 }

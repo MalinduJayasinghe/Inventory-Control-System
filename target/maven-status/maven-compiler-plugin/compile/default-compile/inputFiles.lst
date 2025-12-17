@@ -31,6 +31,7 @@ D:\IJSE Notes\GDSE 75\Final Projects\1st Semester Project\Inventory_Control_Syst
 D:\IJSE Notes\GDSE 75\Final Projects\1st Semester Project\Inventory_Control_System\src\main\java\lk\ijse\inventory_control_system\dto\DamagedItemDTO.java
 D:\IJSE Notes\GDSE 75\Final Projects\1st Semester Project\Inventory_Control_System\src\main\java\lk\ijse\inventory_control_system\dto\ExpensesDTO.java
 D:\IJSE Notes\GDSE 75\Final Projects\1st Semester Project\Inventory_Control_System\src\main\java\lk\ijse\inventory_control_system\model\PurchaseOrderModel.java
+D:\IJSE Notes\GDSE 75\Final Projects\1st Semester Project\Inventory_Control_System\src\main\java\lk\ijse\inventory_control_system\dto\DamagedItemViewDTO.java
 D:\IJSE Notes\GDSE 75\Final Projects\1st Semester Project\Inventory_Control_System\src\main\java\lk\ijse\inventory_control_system\controllers\CustomerOrderController.java
 D:\IJSE Notes\GDSE 75\Final Projects\1st Semester Project\Inventory_Control_System\src\main\java\lk\ijse\inventory_control_system\dto\CustomerOrderDTO.java
 D:\IJSE Notes\GDSE 75\Final Projects\1st Semester Project\Inventory_Control_System\src\main\java\lk\ijse\inventory_control_system\dto\BundleOfferDTO.java
@@ -38,6 +39,7 @@ D:\IJSE Notes\GDSE 75\Final Projects\1st Semester Project\Inventory_Control_Syst
 D:\IJSE Notes\GDSE 75\Final Projects\1st Semester Project\Inventory_Control_System\src\main\java\lk\ijse\inventory_control_system\model\BundleOfferModel.java
 D:\IJSE Notes\GDSE 75\Final Projects\1st Semester Project\Inventory_Control_System\src\main\java\lk\ijse\inventory_control_system\dto\DataReloadDTO.java
 D:\IJSE Notes\GDSE 75\Final Projects\1st Semester Project\Inventory_Control_System\src\main\java\lk\ijse\inventory_control_system\controllers\DashboardController.java
+D:\IJSE Notes\GDSE 75\Final Projects\1st Semester Project\Inventory_Control_System\src\main\java\lk\ijse\inventory_control_system\dto\ItemComboDTO.java
 D:\IJSE Notes\GDSE 75\Final Projects\1st Semester Project\Inventory_Control_System\src\main\java\lk\ijse\inventory_control_system\controllers\DamagedItemController.java
 D:\IJSE Notes\GDSE 75\Final Projects\1st Semester Project\Inventory_Control_System\src\main\java\lk\ijse\inventory_control_system\controllers\DataReloadController.java
 D:\IJSE Notes\GDSE 75\Final Projects\1st Semester Project\Inventory_Control_System\src\main\java\lk\ijse\inventory_control_system\model\DamagedItemModel.java

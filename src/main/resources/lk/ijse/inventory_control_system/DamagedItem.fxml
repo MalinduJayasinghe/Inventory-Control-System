@@ -1,11 +1,115 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.inventory_control_system.controllers.DamagedItemController">
-    
+<AnchorPane prefHeight="500.0" prefWidth="880.0"
+            xmlns="http://javafx.com/javafx/25"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="lk.ijse.inventory_control_system.controllers.DamagedItemController">
+
+    <children>
+
+        <!-- Header -->
+        <AnchorPane prefHeight="42.0" prefWidth="880.0"
+                    style="-fx-background-color: #2C3E50;">
+            <children>
+                <Text layoutX="10" layoutY="32"
+                      text="Damaged Item Management"
+                      style="-fx-fill: white;">
+                    <font>
+                        <Font name="System Bold" size="21"/>
+                    </font>
+                </Text>
+            </children>
+        </AnchorPane>
+
+        <!-- Main Content -->
+        <HBox layoutX="10" layoutY="55" spacing="20">
+
+            <!-- Left Form -->
+            <VBox prefWidth="260" spacing="12">
+
+                <Label text="Search Damaged Item:"/>
+                <ComboBox fx:id="damagedItemComboBox"
+                          onAction="#searchDamage"
+                          promptText="Select Damaged Item"/>
+
+                <Label text="Item:"/>
+                <ComboBox fx:id="itemComboBox"
+                          promptText="Select Item"/>
+
+                <Label text="Quantity Damaged:"/>
+                <TextField fx:id="quantityField"
+                           promptText="Enter Quantity"/>
+
+                <Label text="Date Reported:"/>
+                <DatePicker fx:id="datePicker"/>
+
+                <Label text="Reason:"/>
+                <TextField fx:id="reasonField"
+                           promptText="Enter Reason"/>
+
+                <HBox spacing="10">
+                    <Button text="Save"
+                            onAction="#saveDamage"
+                            style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+
+                    <Button text="Update"
+                            onAction="#updateDamage"
+                            style="-fx-background-color: #2196F3; -fx-text-fill: white;"/>
+
+                    <Button text="Delete"
+                            onAction="#deleteDamage"
+                            style="-fx-background-color: #F44336; -fx-text-fill: white;"/>
+                </HBox>
+
+                <Button text="Clear Fields"
+                        onAction="#resetFields"
+                        style="-fx-background-color: #9E9E9E; -fx-text-fill: white;"/>
+
+            </VBox>
+
+            <!-- Table -->
+            <TableView fx:id="damagedTable"
+                       prefHeight="400.0"
+                       prefWidth="580.0">
+
+                <columns>
+                    <TableColumn fx:id="colDamagedID"
+                                 text="Damaged ID"
+                                 prefWidth="90"/>
+
+                    <TableColumn fx:id="colItemName"
+                                 text="Item Name"
+                                 prefWidth="140"/>
+
+                    <TableColumn fx:id="colQuantity"
+                                 text="Quantity"
+                                 prefWidth="90"/>
+
+                    <TableColumn fx:id="colDate"
+                                 text="Date"
+                                 prefWidth="120"/>
+
+                    <TableColumn fx:id="colReason"
+                                 text="Reason"
+                                 prefWidth="180"/>
+                </columns>
+
+            </TableView>
+
+        </HBox>
+
+    </children>
 </AnchorPane>
