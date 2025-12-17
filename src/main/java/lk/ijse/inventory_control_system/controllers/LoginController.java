@@ -9,14 +9,9 @@ import lk.ijse.inventory_control_system.App;
 
 public class LoginController {
 
-    @FXML
-    private TextField usernameField;
-    
-    @FXML
-    private PasswordField passwordField;
-    
-    @FXML 
-    private Button signInButton;
+    @FXML private TextField usernameField;
+    @FXML private PasswordField passwordField;   
+    @FXML private Button signInButton;   
     
     @FXML
     private void login() throws IOException {

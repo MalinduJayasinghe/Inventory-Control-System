@@ -16,15 +16,8 @@ public class DashboardController {
     @FXML private Button DamagedItems;
     @FXML private Button PurchaseOrders;
     @FXML private Button CustomerOrders;
-    @FXML private Button Payment;
-    @FXML private Button BundleOffers;
-    @FXML private Button CreditPayments;
-    @FXML private Button Photocopying;
-    @FXML private Button DataReload;
-    @FXML private Button Expenses;
     @FXML private Button Customers;
     @FXML private Button Suppliers;
-
     @FXML private Button logoutButton;
     
     @FXML private Pane contentPane;
@@ -39,12 +32,6 @@ public class DashboardController {
         styleButton(DamagedItems, "#2C3E50");
         styleButton(PurchaseOrders, "#2C3E50");
         styleButton(CustomerOrders, "#2C3E50");
-        styleButton(Payment, "#2C3E50");
-        styleButton(BundleOffers, "#2C3E50");
-        styleButton(CreditPayments, "#2C3E50");
-        styleButton(Photocopying, "#2C3E50");
-        styleButton(DataReload, "#2C3E50");
-        styleButton(Expenses, "#2C3E50");
         styleButton(Customers, "#2C3E50");
         styleButton(Suppliers, "#2C3E50");
 
@@ -54,12 +41,6 @@ public class DashboardController {
         setupNavigation(DamagedItems, "DamagedItem");
         setupNavigation(PurchaseOrders, "PurchaseOrder");
         setupNavigation(CustomerOrders, "CustomerOrder");
-        setupNavigation(Payment, "Payment");
-        setupNavigation(BundleOffers, "BundleOffer");
-        setupNavigation(CreditPayments, "CreditPayment");
-        setupNavigation(Photocopying, "Photocopying");
-        setupNavigation(DataReload, "DataReload");
-        setupNavigation(Expenses, "Expenses");
         setupNavigation(Customers, "Customers");
         setupNavigation(Suppliers, "Suppliers");
 

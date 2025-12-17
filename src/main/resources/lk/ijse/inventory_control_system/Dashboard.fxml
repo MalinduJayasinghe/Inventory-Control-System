@@ -35,32 +35,8 @@
 
                     <Button fx:id="CustomerOrders" prefHeight="40" maxWidth="Infinity"
                             style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px;"
-                            text="Customer Orders" />
-
-                    <Button fx:id="Payment" prefHeight="40" maxWidth="Infinity"
-                            style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px;"
-                            text="Payment" />
-
-                    <Button fx:id="BundleOffers" prefHeight="40" maxWidth="Infinity"
-                            style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px;"
-                            text="Bundle Offers" />
-
-                    <Button fx:id="CreditPayments" prefHeight="40" maxWidth="Infinity"
-                            style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px;"
-                            text="Credit Payments" />
-
-                    <Button fx:id="Photocopying" prefHeight="40" maxWidth="Infinity"
-                            style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px;"
-                            text="Photocopying" />
-
-                    <Button fx:id="DataReload" prefHeight="40" maxWidth="Infinity"
-                            style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px;"
-                            text="Data Reload" />
-
-                    <Button fx:id="Expenses" prefHeight="40" maxWidth="Infinity"
-                            style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px;"
-                            text="Expenses" />
-
+                            text="Customer Orders" />       
+                                                                 
                     <Button fx:id="Customers" prefHeight="40" maxWidth="Infinity"
                             style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px;"
                             text="Customers" />

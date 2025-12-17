@@ -1,159 +1,249 @@
 package lk.ijse.inventory_control_system.controllers;
 
-import java.net.URL;
+import javafx.collections.FXCollections;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import lk.ijse.inventory_control_system.dto.ItemComboDTO;
+import lk.ijse.inventory_control_system.dto.ItemsDTO;
+import lk.ijse.inventory_control_system.dto.ItemsViewDTO;
+import lk.ijse.inventory_control_system.dto.SupplierComboDTO;
+import lk.ijse.inventory_control_system.model.ItemsModel;
+import lk.ijse.inventory_control_system.model.SuppliersModel;
+
 import java.sql.SQLException;
 import java.util.List;
-import java.util.ResourceBundle;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.control.cell.PropertyValueFactory;
+public class ItemsController {
 
-import lk.ijse.inventory_control_system.dto.ItemsDTO;
-import lk.ijse.inventory_control_system.model.ItemsModel;
+    @FXML private ComboBox<ItemComboDTO> itemComboBox;
+    @FXML private ComboBox<SupplierComboDTO> supplierComboBox;
 
-public class ItemsController implements Initializable {
-
-    @FXML private TextField itemIdField;
     @FXML private TextField itemNameField;
     @FXML private TextField itemQuantityField;
     @FXML private TextField unitPriceField;
     @FXML private TextField categoryField;
-    @FXML private TextField supplierIdField;
 
-    @FXML private TableView<ItemsDTO> tableItems;
-    @FXML private TableColumn<ItemsDTO, Integer> colItemID;
-    @FXML private TableColumn<ItemsDTO, String> colItemName;
-    @FXML private TableColumn<ItemsDTO, Integer> colItemQuantity;
-    @FXML private TableColumn<ItemsDTO, Double> colUnitPrice;
-    @FXML private TableColumn<ItemsDTO, String> colCategory;
-    @FXML private TableColumn<ItemsDTO, Integer> colSupplierID;
-    
-    @FXML private Button btnSave;
-    @FXML private Button btnUpdate;
-    @FXML private Button btnDelete;
-    @FXML private Button btnReset;
+    @FXML private TableView<ItemsViewDTO> itemsTable;
+    @FXML private TableColumn<ItemsViewDTO, Integer> colItemID;
+    @FXML private TableColumn<ItemsViewDTO, String> colItemName;
+    @FXML private TableColumn<ItemsViewDTO, Integer> colQuantity;
+    @FXML private TableColumn<ItemsViewDTO, Double> colUnitPrice;
+    @FXML private TableColumn<ItemsViewDTO, String> colCategory;
+    @FXML private TableColumn<ItemsViewDTO, Integer> colSupplierID;
 
     private final ItemsModel itemsModel = new ItemsModel();
+    private final SuppliersModel suppliersModel = new SuppliersModel();
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        colItemID.setCellValueFactory(new PropertyValueFactory<>("itemID"));
-        colItemName.setCellValueFactory(new PropertyValueFactory<>("itemName"));
-        colItemQuantity.setCellValueFactory(new PropertyValueFactory<>("itemQuantity"));
-        colUnitPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
-        colCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
-        colSupplierID.setCellValueFactory(new PropertyValueFactory<>("supplierID"));
-
+    @FXML
+    public void initialize() {
+        setupTable();
+        loadItemComboBox();
+        loadSupplierComboBox();
         loadItemTable();
-
-        tableItems.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if(newSelection != null) populateFields(newSelection);
+        
+        itemsTable.getSelectionModel().selectedItemProperty().addListener((obs, old, selected) -> {
+            if (selected != null) {
+                itemNameField.setText(selected.getItemName());
+                itemQuantityField.setText(String.valueOf(selected.getItemQuantity()));
+                unitPriceField.setText(String.valueOf(selected.getUnitPrice()));
+                categoryField.setText(selected.getCategory());
+            }
         });
     }
 
-    private void populateFields(ItemsDTO item) {
-        itemIdField.setText(String.valueOf(item.getItemID()));
-        itemNameField.setText(item.getItemName());
-        itemQuantityField.setText(String.valueOf(item.getItemQuantity()));
-        unitPriceField.setText(String.valueOf(item.getUnitPrice()));
-        categoryField.setText(item.getCategory());
-        supplierIdField.setText(String.valueOf(item.getSupplierID()));
+    private void setupTable() {
+        colItemID.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("itemID"));
+        colItemName.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("itemName"));
+        colQuantity.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("itemQuantity"));
+        colUnitPrice.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("unitPrice"));
+        colCategory.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("category"));
+        colSupplierID.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("supplierID"));
     }
 
-    @FXML
-    private void saveItem() {
+    private void loadItemTable() {
         try {
-            ItemsDTO item = new ItemsDTO(
-            itemNameField.getText(),
-            Integer.parseInt(itemQuantityField.getText()),
-            Double.parseDouble(unitPriceField.getText()),
-            categoryField.getText(),
-            Integer.parseInt(supplierIdField.getText())
-        );
-
-            if(itemsModel.saveItem(item)) {
-                new Alert(Alert.AlertType.INFORMATION, "Item saved successfully!").show();
-                loadItemTable();
-                resetFields();
-            }
+            List<ItemsViewDTO> list = itemsModel.getAllItemsForView();
+            itemsTable.setItems(FXCollections.observableArrayList(list));
         } catch (SQLException e) {
-            e.printStackTrace();
-           new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            new Alert(Alert.AlertType.ERROR, "Cannot load items!").show();
+        }
+    }
+
+    private void loadItemComboBox() {
+        try {
+            List<ItemComboDTO> list = itemsModel.getItemsForCombo();
+            itemComboBox.setItems(FXCollections.observableArrayList(list));
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, "Cannot load items!").show();
+        }
+    }
+
+    private void loadSupplierComboBox() {
+        try {
+            List<SupplierComboDTO> list = suppliersModel.getSuppliersForCombo();
+            supplierComboBox.setItems(FXCollections.observableArrayList(list));
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, "Cannot load suppliers!").show();
         }
     }
 
     @FXML
-    private void handleSearchItem(KeyEvent event) {
-        if(event.getCode() == KeyCode.ENTER) {
-            try {
-                ItemsDTO item = itemsModel.searchItem(itemIdField.getText());
-                if(item != null) populateFields(item);
-                else new Alert(Alert.AlertType.ERROR, "Item not found!").show();
-            } catch (SQLException e) {
-                e.printStackTrace();
+    private void searchItem() {
+        ItemComboDTO selected = itemComboBox.getValue();
+        if (selected == null) return;
+
+        try {
+            ItemsDTO item = itemsModel.searchItem(selected.getItemID());
+            if (item != null) {
+                populateFields(item);
             }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, "Cannot search item!").show();
+        }
+    }
+
+    @FXML
+    private void saveItem() {
+        
+        if (itemNameField.getText().isEmpty() ||
+            itemQuantityField.getText().isEmpty() ||
+            unitPriceField.getText().isEmpty() ||
+            categoryField.getText().isEmpty()) {
+
+            new Alert(Alert.AlertType.WARNING, "Please fill all fields!").show();
+            return;
+        }
+        
+        SupplierComboDTO supplier = supplierComboBox.getValue();
+        if (supplier == null) return;
+
+        try {
+            ItemsDTO item = new ItemsDTO(
+                itemNameField.getText(),
+                Integer.parseInt(itemQuantityField.getText()),
+                Double.parseDouble(unitPriceField.getText()),
+                categoryField.getText(),
+                supplier.getSupplierID()
+            );
+            
+            int qty;
+            double price;
+
+            try {
+                qty = Integer.parseInt(itemQuantityField.getText());
+                price = Double.parseDouble(unitPriceField.getText());
+            } catch (NumberFormatException e) {
+                new Alert(Alert.AlertType.WARNING, "Quantity and Price must be numbers!").show();
+                return;
+            }
+
+            if (itemsModel.saveItem(item)) {
+                new Alert(Alert.AlertType.INFORMATION, "Item saved successfully!").show();
+                loadItemTable();
+                loadItemComboBox();
+                resetFields();
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, "Error saving item!").show();
         }
     }
 
     @FXML
     private void updateItem() {
+        
+        if (itemNameField.getText().isEmpty() ||
+            itemQuantityField.getText().isEmpty() ||
+            unitPriceField.getText().isEmpty() ||
+            categoryField.getText().isEmpty()) {
+
+            new Alert(Alert.AlertType.WARNING, "Please fill all fields!").show();
+            return;
+        }
+        
+        ItemComboDTO selected = itemComboBox.getValue();
+        SupplierComboDTO supplier = supplierComboBox.getValue();
+        if (selected == null || supplier == null) return;
+
         try {
             ItemsDTO item = new ItemsDTO(
-                Integer.parseInt(itemIdField.getText()),
+                selected.getItemID(),
                 itemNameField.getText(),
                 Integer.parseInt(itemQuantityField.getText()),
                 Double.parseDouble(unitPriceField.getText()),
                 categoryField.getText(),
-                Integer.parseInt(supplierIdField.getText())
+                supplier.getSupplierID()
             );
 
-            if(itemsModel.updateItem(item)) {
-                new Alert(Alert.AlertType.INFORMATION, "Item updated successfully!").show();
-                loadItemTable();
-                resetFields();
-            } else new Alert(Alert.AlertType.ERROR, "Update failed!").show();
+            int qty;
+            double price;
 
+            try {
+                qty = Integer.parseInt(itemQuantityField.getText());
+                price = Double.parseDouble(unitPriceField.getText());
+            } catch (NumberFormatException e) {
+                new Alert(Alert.AlertType.WARNING, "Quantity and Price must be numbers!").show();
+                return;
+            }
+            
+            if (itemsModel.updateItem(item)) {
+                new Alert(Alert.AlertType.INFORMATION, "Item updated!").show();
+                loadItemTable();
+                loadItemComboBox();
+                resetFields();
+            }
         } catch (SQLException e) {
-            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Error updating item!").show();
         }
     }
 
     @FXML
-    private void deleteItem() {
-        try {
-            if(itemsModel.deleteItem(itemIdField.getText())) {
-                new Alert(Alert.AlertType.INFORMATION, "Item deleted successfully!").show();
+    private void deleteItem() throws SQLException{
+        ItemComboDTO selectedItem = itemComboBox.getValue();
+        if (selectedItem == null) {
+            new Alert(Alert.AlertType.WARNING, "Select an item to delete!").show();
+            return;
+        }
+
+        Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmAlert.setTitle("Confirm Delete");
+        confirmAlert.setHeaderText("Are you sure you want to delete this item?");
+        confirmAlert.setContentText(
+            "Item: " + selectedItem.getItemName() +
+            " (ID: " + selectedItem.getItemID() + ")"
+        );
+
+        var result = confirmAlert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            if (itemsModel.deleteItem(selectedItem.getItemID())) {
+                new Alert(Alert.AlertType.INFORMATION, "Item deleted!").show();
                 loadItemTable();
                 resetFields();
-            } else new Alert(Alert.AlertType.ERROR, "Delete failed!").show();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Failed to delete item!").show();
+            }
         }
     }
 
     @FXML
     private void resetFields() {
-        itemIdField.clear();
+        itemComboBox.getSelectionModel().clearSelection();
+        supplierComboBox.getSelectionModel().clearSelection();
+
         itemNameField.clear();
         itemQuantityField.clear();
         unitPriceField.clear();
         categoryField.clear();
-        supplierIdField.clear();
     }
 
-    private void loadItemTable() {
-        try {
-            List<ItemsDTO> itemList = itemsModel.getAllItems();
-            ObservableList<ItemsDTO> obList = FXCollections.observableArrayList(itemList);
-            tableItems.setItems(obList);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    private void populateFields(ItemsDTO item) {
+        itemNameField.setText(item.getItemName());
+        itemQuantityField.setText(String.valueOf(item.getItemQuantity()));
+        unitPriceField.setText(String.valueOf(item.getUnitPrice()));
+        categoryField.setText(item.getCategory());
+
+        supplierComboBox.getItems().stream()
+            .filter(s -> s.getSupplierID() == item.getSupplierID())
+            .findFirst()
+            .ifPresent(s -> supplierComboBox.getSelectionModel().select(s));
     }
 }

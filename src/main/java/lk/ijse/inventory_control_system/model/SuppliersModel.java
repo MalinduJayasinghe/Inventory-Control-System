@@ -1,6 +1,8 @@
 package lk.ijse.inventory_control_system.model;
 
 import lk.ijse.inventory_control_system.dto.SuppliersDTO;
+import lk.ijse.inventory_control_system.dto.SupplierComboDTO;
+import lk.ijse.inventory_control_system.dto.SuppliersViewDTO;
 import lk.ijse.inventory_control_system.util.CrudUtil;
 
 import java.sql.ResultSet;
@@ -49,12 +51,11 @@ public class SuppliersModel {
         return CrudUtil.execute("DELETE FROM Suppliers WHERE Supplier_ID=?", Integer.parseInt(id));
     }
 
-    public List<SuppliersDTO> getAllSuppliers() throws SQLException {
+    public List<SuppliersViewDTO> getAllSuppliersForView() throws SQLException {
         ResultSet rs = CrudUtil.execute("SELECT * FROM Suppliers");
-        List<SuppliersDTO> supplierList = new ArrayList<>();
-
+        List<SuppliersViewDTO> list = new ArrayList<>();
         while (rs.next()) {
-            supplierList.add(new SuppliersDTO(
+            list.add(new SuppliersViewDTO(
                 rs.getInt("Supplier_ID"),
                 rs.getString("SupplierName"),
                 rs.getString("Address"),
@@ -62,7 +63,18 @@ public class SuppliersModel {
                 rs.getString("ContactNumber")
             ));
         }
+        return list;
+    }
 
-        return supplierList;
+    public List<SupplierComboDTO> getSuppliersForCombo() throws SQLException {
+        ResultSet rs = CrudUtil.execute("SELECT Supplier_ID, SupplierName FROM Suppliers");
+        List<SupplierComboDTO> list = new ArrayList<>();
+        while (rs.next()) {
+            list.add(new SupplierComboDTO(
+                rs.getInt("Supplier_ID"),
+                rs.getString("SupplierName")
+            ));
+        }
+        return list;
     }
 }

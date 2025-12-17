@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -11,60 +12,50 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="549.0" prefWidth="864.0" style="-fx-background-color: #ECF0F1;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.inventory_control_system.controllers.ItemsController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="lk.ijse.inventory_control_system.controllers.ItemsController">
     <children>
-        <!-- Header -->
-        <VBox prefHeight="40.0" prefWidth="800.0" style="-fx-background-color: #2C3E50;">
-            <children>
-                <Text fill="white" text="  Item Management" wrappingWidth="880.0001220703125">
-                    <font>
-                        <Font name="System Bold" size="21.0" />
-                    </font>
-                </Text>
+        <VBox prefHeight="40" prefWidth="900" style="-fx-background-color:#2C3E50;">
+        <children>
+            <Text fill="WHITE" text=" Item Management">
+            <font><Font name="System Bold" size="21.0" /></font>
+            </Text>
             </children>
-        </VBox>
+            </VBox>
 
-        <!-- Input Fields -->
-        <HBox layoutX="30.0" layoutY="60.0" spacing="10" />
+            <Label layoutX="30" layoutY="60" text="Search for Item:" />
+            <ComboBox fx:id="itemComboBox" layoutX="150" layoutY="56" onAction="#searchItem" prefWidth="200" />
 
-        <HBox layoutX="30.0" layoutY="100.0" spacing="10" />
+            <Label layoutX="30" layoutY="110" text="Item Name:" />
+            <TextField fx:id="itemNameField" layoutX="150" layoutY="106" />
 
-        <!-- Buttons -->
-        <HBox layoutX="554.0" layoutY="209.0" spacing="10">
-            <children>
-                <Button fx:id="btnSave" onAction="#saveItem" style="-fx-background-color: #27AE60; -fx-text-fill: white;" text="Save" />
-                <Button fx:id="btnUpdate" onAction="#updateItem" style="-fx-background-color: #2980B9; -fx-text-fill: white;" text="Update" />
-                <Button fx:id="btnDelete" onAction="#deleteItem" style="-fx-background-color: #C0392B; -fx-text-fill: white;" text="Delete" />
-                <Button fx:id="btnReset" onAction="#resetFields" style="-fx-background-color: #F1C40F; -fx-text-fill: black;" text="Reset" />
-            </children>
-        </HBox>
+            <Label layoutX="30" layoutY="155" text="Quantity:" />
+            <TextField fx:id="itemQuantityField" layoutX="150" layoutY="151" />
 
-        <!-- TableView -->
-        <TableView fx:id="tableItems" layoutX="11.0" layoutY="249.0" onKeyPressed="#handleSearchItem" prefHeight="300.0" prefWidth="857.0" style="-fx-background-color: white; -fx-border-color: #BDC3C7;">
-            <columns>
-                <TableColumn fx:id="colItemID" prefWidth="80" text="Item ID" />
-                <TableColumn fx:id="colItemName" prefWidth="200.79995727539062" text="Item Name" />
-                <TableColumn fx:id="colItemQuantity" prefWidth="88.7999267578125" text="Quantity" />
-                <TableColumn fx:id="colUnitPrice" prefWidth="134.4000244140625" text="Unit Price" />
-                <TableColumn fx:id="colCategory" prefWidth="174.39996337890625" text="Category" />
-                <TableColumn fx:id="colSupplierID" prefWidth="176.00002441406252" text="Supplier ID" />
-            </columns>
-        </TableView>
-          <Label layoutX="475.0" layoutY="163.0" text="Unit Price:" />
-          <TextField fx:id="unitPriceField" layoutX="538.0" layoutY="159.0" prefHeight="26.0" prefWidth="154.0" promptText="Enter Unit Price" />
-          
-                <Label layoutX="472.0" layoutY="59.0" text="Quantity:" />
-          <TextField fx:id="itemQuantityField" layoutX="538.0" layoutY="59.0" prefHeight="26.0" prefWidth="154.0" promptText="Enter Item Quantity" />
-          
-                <Label layoutX="85.0" layoutY="158.0" text="Category:" />
-          <TextField fx:id="categoryField" layoutX="141.0" layoutY="158.0" prefHeight="26.0" prefWidth="177.0" promptText="Enter Item Category" />
-          
-                <Label layoutX="472.0" layoutY="108.0" text="Supplier ID:" />
-          <TextField fx:id="supplierIdField" layoutX="538.0" layoutY="108.0" prefHeight="26.0" prefWidth="154.0" promptText="Enter Supplier ID" />
-          
-                <Label layoutX="74.0" layoutY="113.0" text="Item Name:" />
-          <TextField fx:id="itemNameField" layoutX="141.0" layoutY="113.0" prefHeight="26.0" prefWidth="178.0" promptText="Enter Item Name" />
-          <Label layoutX="31.0" layoutY="69.0" text="Search with Item ID:" />
-          <TextField fx:id="itemIdField" layoutX="142.0" layoutY="69.0" onKeyPressed="#handleSearchItem" prefHeight="26.0" prefWidth="178.0" promptText="Enter Item ID" />
-    </children>
+            <Label layoutX="400" layoutY="110" text="Unit Price:" />
+            <TextField fx:id="unitPriceField" layoutX="520" layoutY="106" />
+
+            <Label layoutX="400" layoutY="155" text="Category:" />
+            <TextField fx:id="categoryField" layoutX="520" layoutY="151" />
+
+            <Label layoutX="30" layoutY="200" text="Supplier:" />
+            <ComboBox fx:id="supplierComboBox" layoutX="150" layoutY="196" prefWidth="200" />
+
+            <HBox layoutX="468.0" layoutY="196.0" spacing="10">
+            <Button onAction="#saveItem" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Save" />
+            <Button onAction="#updateItem" style="-fx-background-color: #2196F3; -fx-text-fill: white;" text="Update" />
+            <Button onAction="#deleteItem" style="-fx-background-color: #F44336; -fx-text-fill: white;" text="Delete" />
+            <Button onAction="#resetFields" style="-fx-background-color: #9E9E9E; -fx-text-fill: white;" text="Reset" />
+            </HBox>
+
+            <TableView fx:id="itemsTable" layoutX="69.0" layoutY="250.0" prefHeight="280" prefWidth="762.0">
+                <columns>
+                    <TableColumn fx:id="colItemID" prefWidth="80" text="ID" />
+                    <TableColumn fx:id="colItemName" prefWidth="180" text="Name" />
+                    <TableColumn fx:id="colQuantity" prefWidth="100" text="Qty" />
+                    <TableColumn fx:id="colUnitPrice" prefWidth="120" text="Price" />
+                    <TableColumn fx:id="colCategory" prefWidth="160" text="Category" />
+                    <TableColumn fx:id="colSupplierID" prefWidth="120" text="Supplier ID" />
+                </columns>
+            </TableView>
+        </children>
 </AnchorPane>

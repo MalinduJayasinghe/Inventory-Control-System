@@ -9,14 +9,10 @@ import lk.ijse.inventory_control_system.dto.ItemComboDTO;
 import lk.ijse.inventory_control_system.model.DamagedItemModel;
 import lk.ijse.inventory_control_system.model.ItemsModel;
 import java.sql.Date;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lk.ijse.inventory_control_system.dto.DamagedItemViewDTO;
-import lk.ijse.inventory_control_system.util.CrudUtil;
 
 public class DamagedItemController {
 

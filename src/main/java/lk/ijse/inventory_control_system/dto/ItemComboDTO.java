@@ -13,6 +13,10 @@ public class ItemComboDTO {
         return itemID;
     }
 
+    public String getItemName() {
+        return itemName;
+    }
+
     @Override
     public String toString() {
         return itemID + " - " + itemName;
