@@ -4,21 +4,16 @@ import java.sql.Date;
 
 public class PurchaseOrderViewDTO {
 
-    private int pOrderID;
     private String supplierName;
     private Date orderDate;
     private double totalAmount;
 
     public PurchaseOrderViewDTO(int pOrderID, String supplierName, Date orderDate, double totalAmount) {
-        this.pOrderID = pOrderID;
         this.supplierName = supplierName;
         this.orderDate = orderDate;
         this.totalAmount = totalAmount;
     }
 
-    public int getpOrderID() {
-        return pOrderID;
-    }
 
     public String getSupplierName() {
         return supplierName;
@@ -31,11 +26,22 @@ public class PurchaseOrderViewDTO {
     public double getTotalAmount() {
         return totalAmount;
     }
+    
+    public void setSupplierName(String supplierName) {
+        this.supplierName = supplierName;
+    }
+
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public void setTotalAmount(double totalAmount) {
+        this.totalAmount = totalAmount;
+    }
 
     @Override
     public String toString() {
         return "PurchaseOrderViewDTO{" +
-                "pOrderID=" + pOrderID +
                 ", supplierName='" + supplierName + '\'' +
                 ", orderDate=" + orderDate +
                 ", totalAmount=" + totalAmount +

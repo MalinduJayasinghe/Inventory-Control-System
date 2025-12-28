@@ -33,6 +33,10 @@ public class PurchaseOrderItemTM {
 
     public double getTotalPrice() { return totalPrice; }
     public void setTotalPrice(double totalPrice) { this.totalPrice = totalPrice; }
+    
+    public void recalcTotal() {
+        this.totalPrice = this.unitPrice * this.qty;
+    }
 
     @Override
     public String toString() {

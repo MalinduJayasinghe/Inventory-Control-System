@@ -62,22 +62,26 @@ public class ItemsModel {
     }
     
     public List<ItemsViewDTO> getAllItemsForView() throws SQLException {
-       List<ItemsViewDTO> list = new ArrayList<>();
+        List<ItemsViewDTO> list = new ArrayList<>();
 
-       ResultSet rs = CrudUtil.execute("SELECT Item_ID, ItemName, ItemQuantity, UnitPrice, Category, Supplier_ID FROM Items");
+        ResultSet rs = CrudUtil.execute(
+            "SELECT i.Item_ID, i.ItemName, i.ItemQuantity, i.UnitPrice, i.Category, s.SupplierName " +
+            "FROM Items i " +
+            "JOIN Suppliers s ON i.Supplier_ID = s.Supplier_ID"
+        );
 
-       while (rs.next()) {
-           list.add(new ItemsViewDTO(
-               rs.getInt("Item_ID"),
-               rs.getString("ItemName"),
-               rs.getInt("ItemQuantity"),
-               rs.getDouble("UnitPrice"),
-               rs.getString("Category"),
-               rs.getInt("Supplier_ID")
-           ));
-       }
-       return list;
-   }
+        while (rs.next()) {
+            list.add(new ItemsViewDTO(
+                rs.getInt("Item_ID"),
+                rs.getString("ItemName"),
+                rs.getInt("ItemQuantity"),
+                rs.getDouble("UnitPrice"),
+                rs.getString("Category"),
+                rs.getString("SupplierName")
+            ));
+        }
+        return list;
+    }
 
     public List<ItemComboDTO> getItemsForCombo() throws SQLException {
         List<ItemComboDTO> list = new ArrayList<>();

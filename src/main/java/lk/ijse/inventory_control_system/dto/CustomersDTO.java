@@ -1,33 +1,53 @@
 package lk.ijse.inventory_control_system.dto;
 
 public class CustomersDTO {
-    private int Customer_ID;
-    private String CustomerName;
-    private String Address;
-    private String ContactNumber;
+    private int customerID;
+    private String customerName;
+    private String address;
+    private String contactNumber;
 
     public CustomersDTO(int customerID, String customerName, String address, String contactNumber) {
-        this.Customer_ID = customerID;
-        this.CustomerName = customerName;
-        this.Address = address;
-        this.ContactNumber = contactNumber;
+        this.customerID = customerID;
+        this.customerName = customerName;
+        this.address = address;
+        this.contactNumber = contactNumber;
     }
 
     public CustomersDTO(String customerName, String address, String contactNumber) {
-        this.CustomerName = customerName;
-        this.Address = address;
-        this.ContactNumber = contactNumber;
+        this.customerName = customerName;
+        this.address = address;
+        this.contactNumber = contactNumber;
     }
 
-    public int getCustomerID() { return Customer_ID; }
-    public void setCustomerID(int customerID) { this.Customer_ID = customerID; }
+    public int getCustomerID() { 
+        return customerID; 
+    }
 
-    public String getCustomerName() { return CustomerName; }
-    public void setCustomerName(String customerName) { this.CustomerName = customerName; }
+    public void setCustomerID(int customerID) { 
+        this.customerID = customerID; 
+    }
 
-    public String getAddress() { return Address; }
-    public void setAddress(String address) { this.Address = address; }
+    public String getCustomerName() { 
+        return customerName; 
+    }
 
-    public String getContactNumber() { return ContactNumber; }
-    public void setContactNumber(String contactNumber) { this.ContactNumber = contactNumber; }
+    public void setCustomerName(String customerName) { 
+        this.customerName = customerName; 
+    }
+
+    public String getAddress() { 
+        return address; 
+    }
+
+    public void setAddress(String address) { 
+        this.address = address; 
+    }
+
+    public String getContactNumber() { 
+        return contactNumber; 
+    }
+
+    public void setContactNumber(String contactNumber) { 
+        this.contactNumber = contactNumber; 
+    }
 }

@@ -12,6 +12,7 @@ import lk.ijse.inventory_control_system.model.SuppliersModel;
 
 import java.sql.SQLException;
 import java.util.List;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ItemsController {
 
@@ -29,7 +30,7 @@ public class ItemsController {
     @FXML private TableColumn<ItemsViewDTO, Integer> colQuantity;
     @FXML private TableColumn<ItemsViewDTO, Double> colUnitPrice;
     @FXML private TableColumn<ItemsViewDTO, String> colCategory;
-    @FXML private TableColumn<ItemsViewDTO, Integer> colSupplierID;
+    @FXML private TableColumn<ItemsViewDTO, String> colSupplierName;
 
     private final ItemsModel itemsModel = new ItemsModel();
     private final SuppliersModel suppliersModel = new SuppliersModel();
@@ -40,24 +41,42 @@ public class ItemsController {
         loadItemComboBox();
         loadSupplierComboBox();
         loadItemTable();
-        
+
         itemsTable.getSelectionModel().selectedItemProperty().addListener((obs, old, selected) -> {
             if (selected != null) {
                 itemNameField.setText(selected.getItemName());
                 itemQuantityField.setText(String.valueOf(selected.getItemQuantity()));
                 unitPriceField.setText(String.valueOf(selected.getUnitPrice()));
                 categoryField.setText(selected.getCategory());
+
+                itemComboBox.getItems().stream()
+                    .filter(item -> item.getItemID() == selected.getItemID())
+                    .findFirst()
+                    .ifPresent(item -> itemComboBox.getSelectionModel().select(item));
+
+                try {
+                    ItemsDTO fullItem = itemsModel.searchItem(selected.getItemID());
+                    if (fullItem != null) {
+                        supplierComboBox.getItems().stream()
+                            .filter(s -> s.getSupplierID() == fullItem.getSupplierID())
+                            .findFirst()
+                            .ifPresent(s -> supplierComboBox.getSelectionModel().select(s));
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    new Alert(Alert.AlertType.ERROR, "Cannot load Item Information!").show();
+                }
             }
         });
     }
 
     private void setupTable() {
-        colItemID.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("itemID"));
-        colItemName.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("itemName"));
-        colQuantity.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("itemQuantity"));
-        colUnitPrice.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("unitPrice"));
-        colCategory.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("category"));
-        colSupplierID.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("supplierID"));
+        colItemID.setCellValueFactory(new PropertyValueFactory<>("itemID"));
+        colItemName.setCellValueFactory(new PropertyValueFactory<>("itemName"));
+        colQuantity.setCellValueFactory(new PropertyValueFactory<>("itemQuantity"));
+        colUnitPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
+        colCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
+        colSupplierName.setCellValueFactory(new PropertyValueFactory<>("supplierName"));
     }
 
     private void loadItemTable() {

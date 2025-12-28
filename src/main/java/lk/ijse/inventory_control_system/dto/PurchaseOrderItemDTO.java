@@ -11,16 +11,14 @@ public class PurchaseOrderItemDTO {
     public PurchaseOrderItemDTO() {
     }
 
-    public PurchaseOrderItemDTO(int pOrderID, int itemID, int qty, double unitPrice) {
-        this.pOrderID = pOrderID;
+    public PurchaseOrderItemDTO(int itemID, int qty, double unitPrice) {
         this.itemID = itemID;
         this.qty = qty;
         this.unitPrice = unitPrice;
     }
 
-    public PurchaseOrderItemDTO(int id, int pOrderID, int itemID, int qty, double unitPrice) {
+    public PurchaseOrderItemDTO(int id, int itemID, int qty, double unitPrice) {
         this.id = id;
-        this.pOrderID = pOrderID;
         this.itemID = itemID;
         this.qty = qty;
         this.unitPrice = unitPrice;

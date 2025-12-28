@@ -6,20 +6,20 @@ public class PurchaseOrderDTO {
 
     private int pOrderID;
     private int supplierID;
-    private Date orderDate;
+    private Date OrderDate;
 
     public PurchaseOrderDTO() {
     }
 
     public PurchaseOrderDTO(int supplierID, Date orderDate) {
         this.supplierID = supplierID;
-        this.orderDate = orderDate;
+        this.OrderDate = orderDate;
     }
 
     public PurchaseOrderDTO(int pOrderID, int supplierID, Date orderDate) {
         this.pOrderID = pOrderID;
         this.supplierID = supplierID;
-        this.orderDate = orderDate;
+        this.OrderDate = orderDate;
     }
 
     public int getpOrderID() {
@@ -39,11 +39,11 @@ public class PurchaseOrderDTO {
     }
 
     public Date getOrderDate() {
-        return orderDate;
+        return OrderDate;
     }
 
     public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
+        this.OrderDate = orderDate;
     }
 
     @Override
@@ -51,7 +51,7 @@ public class PurchaseOrderDTO {
         return "PurchaseOrderDTO{" +
                 "pOrderID=" + pOrderID +
                 ", supplierID=" + supplierID +
-                ", orderDate=" + orderDate +
+                ", orderDate=" + OrderDate +
                 '}';
     }
 }

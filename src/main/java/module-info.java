@@ -3,6 +3,7 @@ module lk.ijse.inventory_control_system {
     requires javafx.fxml;
     requires java.base;
     requires java.sql;
+    requires net.sf.jasperreports.core;
 
     opens lk.ijse.inventory_control_system.controllers to javafx.fxml;
     opens lk.ijse.inventory_control_system.dto to javafx.base;

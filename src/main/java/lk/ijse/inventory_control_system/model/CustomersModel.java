@@ -1,16 +1,16 @@
 package lk.ijse.inventory_control_system.model;
 
+import lk.ijse.inventory_control_system.dto.CustomersDTO;
+import lk.ijse.inventory_control_system.dto.CustomerComboDTO;
+import lk.ijse.inventory_control_system.dto.CustomersViewDTO;
 import lk.ijse.inventory_control_system.util.CrudUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import lk.ijse.inventory_control_system.dto.CustomersDTO;
 
 public class CustomersModel {
-
-    // Save a new customer (ID is auto-generated)
     public boolean saveCustomer(CustomersDTO customer) throws SQLException {
         return CrudUtil.execute(
             "INSERT INTO Customer (CustomerName, Address, ContactNumber) VALUES (?,?,?)",
@@ -21,10 +21,7 @@ public class CustomersModel {
     }
 
     public CustomersDTO searchCustomer(String id) throws SQLException {
-        ResultSet rs = CrudUtil.execute(
-            "SELECT * FROM Customer WHERE Customer_ID=?",
-            Integer.parseInt(id)
-        );
+        ResultSet rs = CrudUtil.execute("SELECT * FROM Customer WHERE Customer_ID=?", Integer.parseInt(id));
         if (rs.next()) {
             return new CustomersDTO(
                 rs.getInt("Customer_ID"),
@@ -47,25 +44,32 @@ public class CustomersModel {
     }
 
     public boolean deleteCustomer(String id) throws SQLException {
-        return CrudUtil.execute(
-            "DELETE FROM Customer WHERE Customer_ID=?",
-            Integer.parseInt(id)
-        );
+        return CrudUtil.execute("DELETE FROM Customer WHERE Customer_ID=?", Integer.parseInt(id));
     }
 
-    public List<CustomersDTO> getAllCustomers() throws SQLException {
+    public List<CustomersViewDTO> getAllCustomersForView() throws SQLException {
         ResultSet rs = CrudUtil.execute("SELECT * FROM Customer");
-        List<CustomersDTO> customerList = new ArrayList<>();
-
+        List<CustomersViewDTO> list = new ArrayList<>();
         while (rs.next()) {
-            customerList.add(new CustomersDTO(
+            list.add(new CustomersViewDTO(
                 rs.getInt("Customer_ID"),
                 rs.getString("CustomerName"),
                 rs.getString("Address"),
                 rs.getString("ContactNumber")
             ));
         }
+        return list;
+    }
 
-        return customerList;
+    public List<CustomerComboDTO> getCustomersForCombo() throws SQLException {
+        ResultSet rs = CrudUtil.execute("SELECT Customer_ID, CustomerName FROM Customer");
+        List<CustomerComboDTO> list = new ArrayList<>();
+        while (rs.next()) {
+            list.add(new CustomerComboDTO(
+                rs.getInt("Customer_ID"),
+                rs.getString("CustomerName")
+            ));
+        }
+        return list;
     }
 }
