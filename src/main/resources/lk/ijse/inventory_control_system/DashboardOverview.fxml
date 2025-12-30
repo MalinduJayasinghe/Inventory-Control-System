@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane style="-fx-background-color: #f1f5f9;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.inventory_control_system.controllers.DashboardOverviewController">
+    
+    <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" style="-fx-background: #f1f5f9; -fx-border-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <content>
+            <VBox spacing="25" style="-fx-padding: 30;">
+            
+            <!-- Statistics Cards -->
+            <GridPane hgap="20" vgap="20">
+                
+                <!-- Total Items Card -->
+                <VBox prefHeight="140" prefWidth="200" spacing="10" style="-fx-background-color: white; -fx-padding: 25; -fx-background-radius: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 15, 0, 0, 3);" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <HBox alignment="CENTER_LEFT" spacing="15">
+                        <StackPane prefHeight="50" prefWidth="50" style="-fx-background-color: #dbeafe; -fx-background-radius: 12;">
+                            <Label style="-fx-text-fill: #3b82f6; -fx-font-size: 24px;" text="📦" />
+                        </StackPane>
+                        <VBox spacing="5">
+                            <Label style="-fx-text-fill: #64748b; -fx-font-size: 13px;" text="Total Items" />
+                            <Label fx:id="totalItemsLabel" style="-fx-text-fill: #1e293b; -fx-font-size: 28px; -fx-font-weight: bold;" text="0" />
+                        </VBox>
+                    </HBox>
+                </VBox>
+                
+                <!-- Low Stock Items Card -->
+                <VBox prefHeight="140" prefWidth="200" spacing="10" style="-fx-background-color: white; -fx-padding: 25; -fx-background-radius: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 15, 0, 0, 3);" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <HBox alignment="CENTER_LEFT" spacing="15">
+                        <StackPane prefHeight="50" prefWidth="50" style="-fx-background-color: #fef3c7; -fx-background-radius: 12;">
+                            <Label style="-fx-text-fill: #f59e0b; -fx-font-size: 24px;" text="⚡" />
+                        </StackPane>
+                        <VBox spacing="5">
+                            <Label style="-fx-text-fill: #64748b; -fx-font-size: 13px;" text="Low Stock Alert" />
+                            <Label fx:id="lowStockLabel" style="-fx-text-fill: #1e293b; -fx-font-size: 28px; -fx-font-weight: bold;" text="0" />
+                        </VBox>
+                    </HBox>
+                </VBox>
+                
+                <!-- Total Orders Card -->
+                <VBox prefHeight="140" prefWidth="200" spacing="10" style="-fx-background-color: white; -fx-padding: 25; -fx-background-radius: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 15, 0, 0, 3);" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                    <HBox alignment="CENTER_LEFT" spacing="15">
+                        <StackPane prefHeight="50" prefWidth="50" style="-fx-background-color: #d1fae5; -fx-background-radius: 12;">
+                            <Label style="-fx-text-fill: #10b981; -fx-font-size: 24px;" text="🛍️" />
+                        </StackPane>
+                        <VBox spacing="5">
+                            <Label style="-fx-text-fill: #64748b; -fx-font-size: 13px;" text="Total Orders" />
+                            <Label fx:id="totalOrdersLabel" style="-fx-text-fill: #1e293b; -fx-font-size: 28px; -fx-font-weight: bold;" text="0" />
+                        </VBox>
+                    </HBox>
+                </VBox>
+                
+                <!-- Damaged Items Card -->
+                <VBox prefHeight="140" prefWidth="200" spacing="10" style="-fx-background-color: white; -fx-padding: 25; -fx-background-radius: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 15, 0, 0, 3);" GridPane.columnIndex="3" GridPane.rowIndex="0">
+                    <HBox alignment="CENTER_LEFT" spacing="15">
+                        <StackPane prefHeight="50" prefWidth="50" style="-fx-background-color: #fee2e2; -fx-background-radius: 12;">
+                            <Label style="-fx-text-fill: #dc2626; -fx-font-size: 24px;" text="⚠️" />
+                        </StackPane>
+                        <VBox spacing="5">
+                            <Label style="-fx-text-fill: #64748b; -fx-font-size: 13px;" text="Damaged Items" />
+                            <Label fx:id="damagedItemsLabel" style="-fx-text-fill: #1e293b; -fx-font-size: 28px; -fx-font-weight: bold;" text="0" />
+                        </VBox>
+                    </HBox>
+                </VBox>
+               <columnConstraints>
+                  <ColumnConstraints />
+                  <ColumnConstraints />
+                  <ColumnConstraints />
+                  <ColumnConstraints />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints />
+               </rowConstraints>
+                
+            </GridPane>
+            
+            <!--Quick Actions -->
+            <HBox spacing="20">
+               <VBox prefHeight="200.0" prefWidth="261.0" />               
+                <!-- Quick Actions -->
+                <VBox prefWidth="280" spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-background-radius: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 15, 0, 0, 3);">
+                    <Label style="-fx-text-fill: #1e293b; -fx-font-size: 18px; -fx-font-weight: bold;" text="Quick Actions" />
+                    <Button fx:id="addItemButton" maxWidth="Infinity" onAction="#quickAddItem" prefHeight="45" style="-fx-background-color: #3b82f6; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 10; -fx-cursor: hand;" text="➕ Add New Item" />
+                    <Button fx:id="createOrderButton" maxWidth="Infinity" onAction="#quickCreateOrder" prefHeight="45" style="-fx-background-color: #10b981; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 10; -fx-cursor: hand;" text="📝 Create Order" />
+                </VBox>
+                
+            </HBox>
+            
+            </VBox>
+        </content>
+    </ScrollPane>
+    
+</AnchorPane>
