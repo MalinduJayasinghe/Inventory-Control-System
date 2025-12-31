@@ -39,6 +39,7 @@ lk\ijse\inventory_control_system\dto\SuppliersViewDTO.class
 lk\ijse\inventory_control_system\model\CustomerOrderModel.class
 lk\ijse\inventory_control_system\controllers\DashboardOverviewController.class
 lk\ijse\inventory_control_system\util\CrudUtil.class
+lk\ijse\inventory_control_system\dto\LowStockItemDTO.class
 lk\ijse\inventory_control_system\model\PurchaseOrderItemModel.class
 lk\ijse\inventory_control_system\App.class
 lk\ijse\inventory_control_system\model\PurchaseOrderModel.class

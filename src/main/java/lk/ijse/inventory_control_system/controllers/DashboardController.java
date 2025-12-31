@@ -135,6 +135,8 @@ public class DashboardController {
                 contentPane.getChildren().clear();
                 contentPane.getChildren().add(pane);
                 
+                pane.getScene().getRoot().setUserData(this);
+                
                 AnchorPane.setTopAnchor(pane, 0.0);
                 AnchorPane.setBottomAnchor(pane, 0.0);
                 AnchorPane.setLeftAnchor(pane, 0.0);
@@ -146,6 +148,23 @@ public class DashboardController {
                 ex.printStackTrace();
             }
         });
+    }
+    
+    public void loadView(Pane pane, String title) {
+        pageTitle.setText(title);
+        contentPane.getChildren().clear();
+        contentPane.getChildren().add(pane);
+        
+        AnchorPane.setTopAnchor(pane, 0.0);
+        AnchorPane.setBottomAnchor(pane, 0.0);
+        AnchorPane.setLeftAnchor(pane, 0.0);
+        AnchorPane.setRightAnchor(pane, 0.0);
+        
+        if (title.equals("Items")) {
+            highlightButton(Items);
+        } else if (title.equals("Purchase Orders")) {
+            highlightButton(PurchaseOrders);
+        }
     }
     
     private void highlightButton(Button button) {
