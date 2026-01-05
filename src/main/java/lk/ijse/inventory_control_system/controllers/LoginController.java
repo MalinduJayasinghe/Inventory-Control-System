@@ -34,7 +34,7 @@ public class LoginController {
             try {
                 showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome, " + username + "!");
                 App.loadWindow("Dashboard");
-                loginAttempts = 0; // Reset attempts on successful login
+                loginAttempts = 0; 
             } catch (IOException e) {
                 e.printStackTrace();
                 showAlert(Alert.AlertType.ERROR, "Error", "Failed to load dashboard!");

@@ -1,5 +1,7 @@
 package lk.ijse.inventory_control_system.controllers;
 
+import java.io.InputStream;
+import java.sql.Connection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,8 +15,16 @@ import lk.ijse.inventory_control_system.model.CustomersModel;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import lk.ijse.inventory_control_system.db.DBConnection;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class CustomerOrderController {
 
@@ -173,9 +183,25 @@ public class CustomerOrderController {
             new Alert(Alert.AlertType.WARNING, "Select a customer!").show();
             return;
         }
+        
+        if (orderDatePicker.getValue() == null) {
+            new Alert(Alert.AlertType.WARNING, "Please select an order date!").show();
+            return;
+        }
 
-        int customerID = selectedCustomer.getCustomerID();
-        Date orderDate = Date.valueOf(orderDatePicker.getValue());
+        Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmAlert.setTitle("Confirm Customer Order");
+        confirmAlert.setHeaderText("Place this customer order?");
+        confirmAlert.setContentText(
+            "Customer: " + selectedCustomer.getCustomerName() + "\n" +
+            "Total Items: " + customerOrderList.size() + "\n" +
+            "Total Amount: " + lblTotal.getText()
+        );
+
+        var result = confirmAlert.showAndWait();
+        if (result.isEmpty() || result.get() != ButtonType.OK) {
+            return;
+        }
 
         try {
             int cOrderID = customerOrderModel.saveAndGetID(
@@ -189,14 +215,39 @@ public class CustomerOrderController {
                     .collect(Collectors.toList())
             );
 
-            new Alert(Alert.AlertType.INFORMATION, "Customer order placed successfully!").show();
+            new Alert(Alert.AlertType.INFORMATION, "Customer order placed successfully!\nOrder ID: " + cOrderID).show();
+
+            try {
+                printInvoice(cOrderID);
+            } catch (JRException e) {
+                e.printStackTrace();
+                new Alert(Alert.AlertType.WARNING, "Order saved but failed to print invoice!").show();
+            }
+
             customerOrderList.clear();
             updateTotal();
             resetFields();
 
         } catch (SQLException e) {
             e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR, "Failed to place customer order!").show();
+            new Alert(Alert.AlertType.ERROR, "Failed to place customer order!\n" + e.getMessage()).show();
         }
+    }
+
+    public void printInvoice(int orderId) throws SQLException, JRException {
+        Connection conn = DBConnection.getInstance().getConnection();
+
+        HashMap<String, Object> parameters = new HashMap<>();
+        parameters.put("orderId", orderId);
+
+        InputStream inputStream = getClass().getResourceAsStream("/lk/ijse/inventory_control_system/reports/customerOrder.jrxml");
+        
+        if (inputStream == null) {
+            throw new JRException("Report file not found!");
+        }
+        
+        JasperReport jr = JasperCompileManager.compileReport(inputStream);
+        JasperPrint jp = JasperFillManager.fillReport(jr, parameters, conn);
+        JasperViewer.viewReport(jp, false);
     }
 }

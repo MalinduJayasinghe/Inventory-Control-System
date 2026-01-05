@@ -75,16 +75,23 @@ public class DashboardOverviewController {
         }
     }
     
+    private DashboardController dashboardController;
+    
+    public void setDashboardController(DashboardController dashboardController) {
+        this.dashboardController = dashboardController;
+    }
+    
     @FXML
     private void quickAddItem() {
         try {
-            DashboardController dashboardController = getDashboardController();
             if (dashboardController != null) {
                 Pane itemsPane = FXMLLoader.load(
                     getClass().getResource("/lk/ijse/inventory_control_system/Items.fxml")
                 );
                 
                 dashboardController.loadView(itemsPane, "Items");
+            } else {
+                new Alert(Alert.AlertType.WARNING, "Dashboard controller not initialized!").show();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -95,28 +102,18 @@ public class DashboardOverviewController {
     @FXML
     private void quickCreateOrder() {
         try {
-            DashboardController dashboardController = getDashboardController();
             if (dashboardController != null) {
                 Pane purchaseOrderPane = FXMLLoader.load(
                     getClass().getResource("/lk/ijse/inventory_control_system/PurchaseOrder.fxml")
                 );
                 
                 dashboardController.loadView(purchaseOrderPane, "Purchase Orders");
+            } else {
+                new Alert(Alert.AlertType.WARNING, "Dashboard controller not initialized!").show();
             }
         } catch (IOException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Failed to load Purchase Order view!").show();
         }
-    }
-    
-    private DashboardController getDashboardController() {
-        try {
-            Object userData = lowStockTable.getScene().getRoot().getUserData();
-            if (userData instanceof DashboardController) {
-                return (DashboardController) userData;
-            }
-        } catch (Exception e) {
-        }
-        return null;
     }
 }

@@ -1,0 +1,104 @@
+<!-- Created with Jaspersoft Studio version 7.0.3.final using JasperReports Library version 7.0.3-41034ca841d452f3305ba55b9042260aaa1ab5dd  -->
+<jasperReport name="customerOrder" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a1c4e92f-6d34-4e7b-baf4-2c7e9f3b0a61">
+	<parameter name="orderId" class="java.lang.Integer"/>
+	<query language="SQL"><![CDATA[
+SELECT
+    i.Item_ID,
+    i.ItemName,
+    coi.c_order_id,
+    coi.unit_price AS UnitPrice,
+    coi.qty AS Quantity,
+    co.Date AS OrderDate,
+    c.Customer_ID,
+    c.CustomerName
+FROM CustomerOrderItem coi
+JOIN Items i ON coi.item_id = i.Item_ID
+JOIN CustomerOrder co ON coi.c_order_id = co.Order_ID
+JOIN Customer c ON co.Customer_ID = c.Customer_ID
+WHERE co.Order_ID = $P{orderId}
+ORDER BY co.Date, i.ItemName
+    ]]></query>
+	<field name="Item_ID" class="java.lang.Integer"/>
+	<field name="ItemName" class="java.lang.String"/>
+	<field name="c_order_id" class="java.lang.Integer"/>
+	<field name="UnitPrice" class="java.lang.Double"/>
+	<field name="Quantity" class="java.lang.Integer"/>
+	<field name="OrderDate" class="java.sql.Date"/>
+	<field name="Customer_ID" class="java.lang.Integer"/>
+	<field name="CustomerName" class="java.lang.String"/>
+	<variable name="TotalCost" calculation="Sum" class="java.lang.Double">
+		<expression><![CDATA[$F{UnitPrice} * $F{Quantity}]]></expression>
+	</variable>
+	<title height="120">
+		<element kind="rectangle" uuid="b2a9f4e3-1c76-4a6d-9b52-5f38d7a40e91" x="0" y="0" width="555" height="120" backcolor="#1E293B"/>
+		<element kind="staticText" uuid="c41b8e7f-30a9-4b1e-bd67-82f3a49c1e65" x="0" y="10" width="555" height="40" forecolor="#FFFFFF" fontSize="36.0" bold="true" hTextAlign="Center">
+			<text><![CDATA[CUSTOMER ORDER]]></text>
+		</element>
+		<element kind="staticText" uuid="d5f3b72c-9a64-4e91-b0e8-7f12c8a63d44" x="0" y="50" width="555" height="45" forecolor="#E0E7FF" fontSize="29.0" bold="true" hTextAlign="Center">
+			<text><![CDATA[Customer Order]]></text>
+		</element>
+	</title>
+	<pageHeader height="130">
+		<element kind="rectangle" uuid="e8a5c3d7-1b24-4f6e-9a52-3c4d8f7a2e19" x="0" y="15" width="555" height="100" backcolor="#F8FAFC"/>
+		<element kind="staticText" uuid="f1a47d82-5b3c-4a6e-bd91-0c7f2e9a54d8" x="20" y="30" width="100" height="25" forecolor="#475569" bold="true">
+			<text><![CDATA[Order ID:]]></text>
+		</element>
+		<element kind="textField" uuid="0a3b7f92-d8e4-4c5a-8e1d-92b74a6c3f51" x="120" y="30" width="150" height="25" forecolor="#1E293B" fontSize="14.0" bold="true">
+			<expression><![CDATA["#" + $F{c_order_id}]]></expression>
+		</element>
+		<element kind="staticText" uuid="19c7a3b2-6d4e-4f91-8e7c-53a92d4f6e81" x="20" y="60" width="100" height="25" forecolor="#475569" bold="true">
+			<text><![CDATA[Customer:]]></text>
+		</element>
+		<element kind="textField" uuid="2e5f9b1a-6d84-4c7b-8e39-5d7a9f3b14c2" x="120" y="60" width="200" height="25" forecolor="#1E293B" fontSize="14.0">
+			<expression><![CDATA[$F{CustomerName}]]></expression>
+		</element>
+		<element kind="staticText" uuid="3c1a5e7f-9d84-4b6c-8a39-1e7b4f9d2c65" x="340" y="30" width="100" height="25" forecolor="#475569" bold="true">
+			<text><![CDATA[Order Date:]]></text>
+		</element>
+		<element kind="textField" uuid="4f9d2c1b-5e3a-4d87-8b62-a4f6e39c7d21" x="440" y="30" width="100" height="25" forecolor="#1E293B" fontSize="14.0" pattern="dd/MM/yyyy">
+			<expression><![CDATA[$F{OrderDate}]]></expression>
+		</element>
+		<element kind="staticText" uuid="5a9d4f6e-7b31-4c28-9e5a-3d1c8f2b6a74" x="340" y="60" width="100" height="25" forecolor="#475569" bold="true">
+			<text><![CDATA[Customer ID:]]></text>
+		</element>
+		<element kind="textField" uuid="6e8b3c5f-9d12-4a7e-b1f9-52d4a6c73e18" x="440" y="60" width="100" height="25" forecolor="#1E293B" fontSize="14.0">
+			<expression><![CDATA[$F{Customer_ID}]]></expression>
+		</element>
+	</pageHeader>
+	<columnHeader height="50">
+		<element kind="rectangle" uuid="7d9e4c6b-1f52-4a83-b5c9-8e7d3f2a6c41" x="0" y="10" width="555" height="35" backcolor="#1E293B"/>
+		<element kind="staticText" uuid="8c3f5a7e-6d9b-4a21-9e3c-2b4f7d1a8c65" x="10" y="18" width="220" height="25" forecolor="#FFFFFF" bold="true">
+			<text><![CDATA[ITEM NAME]]></text>
+		</element>
+		<element kind="staticText" uuid="9e7b5d1a-4f3c-4c92-8e5a-7d1b3f6a8c29" x="240" y="18" width="80" height="25" forecolor="#FFFFFF" bold="true" hTextAlign="Center">
+			<text><![CDATA[QTY]]></text>
+		</element>
+		<element kind="staticText" uuid="a1c9f7e3-6b2a-4d58-8f5c-3e9a7d1b2c64" x="330" y="18" width="105" height="25" forecolor="#FFFFFF" bold="true" hTextAlign="Center">
+			<text><![CDATA[UNIT PRICE]]></text>
+		</element>
+		<element kind="staticText" uuid="b6c1a7f9-3e4d-4b52-8f9a-7d2e1c5b3a48" x="445" y="18" width="100" height="25" forecolor="#FFFFFF" bold="true" hTextAlign="Right">
+			<text><![CDATA[AMOUNT]]></text>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="40">
+			<element kind="rectangle" uuid="c5a1f7b9-2d6e-4c83-9b4a-8e7f3d1c5a62" x="0" y="0" width="555" height="40" backcolor="#F8FAFC">
+				<printWhenExpression><![CDATA[$V{REPORT_COUNT} % 2 != 0]]></printWhenExpression>
+			</element>
+			<element kind="textField" uuid="d7b3a9f1-4e6c-4a82-8f3c-5d1e9a7b6c28" x="10" y="10" width="220" height="20">
+				<expression><![CDATA[$F{ItemName}]]></expression>
+			</element>
+			<element kind="textField" uuid="e1a5b7c9-8d4f-4b63-9e5a-3f7d1c6b28a4" x="240" y="10" width="80" height="20" hTextAlign="Center">
+				<expression><![CDATA[$F{Quantity}]]></expression>
+			</element>
+			<element kind="textField" uuid="f8c3d5a1-6e2b-4a79-9f3c-7d1b5a4c9e82" x="330" y="10" width="105" height="20" pattern="'Rs.' #,##0.00" hTextAlign="Center">
+				<expression><![CDATA[$F{UnitPrice}]]></expression>
+			</element>
+			<element kind="textField" uuid="0d9c3a6b-7e1f-4a82-b5f9-8d2c1a7e6b43" x="445" y="10" width="100" height="20" forecolor="#3B82F6" pattern="'Rs.' #,##0.00" bold="true" hTextAlign="Right">
+				<expression><![CDATA[
+$F{UnitPrice}.doubleValue() * $F{Quantity}.doubleValue()
+                ]]></expression>
+			</element>
+		</band>
+	</detail>
+</jasperReport>

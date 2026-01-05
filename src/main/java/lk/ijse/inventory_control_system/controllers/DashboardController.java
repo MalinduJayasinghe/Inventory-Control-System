@@ -131,11 +131,16 @@ public class DashboardController {
                         .replace("🛒 ", "").replace("🛍️ ", "").replace("👥 ", "").replace("🏢 ", ""));
                 }
                 
-                Pane pane = FXMLLoader.load(getClass().getResource("/lk/ijse/inventory_control_system/" + fxmlName + ".fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/lk/ijse/inventory_control_system/" + fxmlName + ".fxml"));
+                Pane pane = loader.load();
+                
+                if (fxmlName.equals("DashboardOverview")) {
+                    DashboardOverviewController overviewController = loader.getController();
+                    overviewController.setDashboardController(this);
+                }
+                
                 contentPane.getChildren().clear();
                 contentPane.getChildren().add(pane);
-                
-                pane.getScene().getRoot().setUserData(this);
                 
                 AnchorPane.setTopAnchor(pane, 0.0);
                 AnchorPane.setBottomAnchor(pane, 0.0);
