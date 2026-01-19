@@ -33,14 +33,12 @@ public class CustomersController {
         loadCustomerTable();
         loadCustomerComboBox();
         
-        // Add table selection listener to populate fields when clicking on table rows
         customersTable.getSelectionModel().selectedItemProperty().addListener((obs, old, selected) -> {
             if (selected != null) {
                 customerNameField.setText(selected.getCustomerName());
                 addressField.setText(selected.getAddress());
                 contactNumberField.setText(selected.getContactNumber());
                 
-                // Set the customer combo box
                 customerIDField.getItems().stream()
                     .filter(customer -> customer.getCustomerID() == selected.getCustomerID())
                     .findFirst()
